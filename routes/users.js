@@ -23,7 +23,7 @@ router.post('/register', function (req, res, next) {
 })
 router.post('/answerstore', function (req, res, next) {
   var answer = new Answer({
-    username: req.body.username,
+    email: req.body.username,
     one: req.body.one,
     two: req.body.two,
     three: req.body.three
@@ -39,7 +39,7 @@ router.post('/answerstore', function (req, res, next) {
     return res.status(501).json({ message: 'Error answerStore user.' })
   })
 })
-  
+
 
 
 
@@ -62,6 +62,14 @@ router.post('/login', function (req, res, next) {
       return res.status(501).json({ message: 'User email is not registered.' })
     }
   });
+
+  router.post('/answerget', function (req, res, next) {
+    let promise = Answer.findOne({ email: "afras.ali21@gmail.com" }).exec();
+    promise.then(function (doc) {
+      return res.status(200).json(req);
+    });
+  });
+
 
   promise.catch(function (err) {
     return res.status(501).json({ message: 'Some internal error' });

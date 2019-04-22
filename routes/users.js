@@ -21,27 +21,26 @@ router.post('/register', function (req, res, next) {
     return res.status(501).json({ message: 'Error registering user.' })
   })
 })
-
-  
-router.post('/answerStore', function (req, res) {
-  var question = new Answer({
+router.post('/answerstore', function (req, res, next) {
+  var answer = new Answer({
     username: req.body.username,
-    q1: req.post.q1,
-    q2: req.post.q2,
-    q3: req.post.q3
+    one: req.body.one,
+    two: req.body.two,
+    three: req.body.three
+
   });
-
-
-  let promise = question.save();
+  let promise = answer.save();
 
   promise.then(function (doc) {
     return res.status(201).json(doc);
   })
 
   promise.catch(function (err) {
-    return res.status(501).json({ message: 'Some thing Went Wrong' })
+    return res.status(501).json({ message: 'Error answerStore user.' })
   })
 })
+  
+
 
 
 router.post('/login', function (req, res, next) {
